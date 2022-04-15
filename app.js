@@ -9,8 +9,7 @@ app.use(express.json())
 app.use(cors());
 
 const APP = './app/routes'
-
-const nodes = ['basic','board','user']
+const nodes = ['basic','board','user','game', 'todo']
 for(const leaf of nodes){
   require(`${APP}/${leaf}.route`)({url:`/api/${leaf}`,app})
 }
