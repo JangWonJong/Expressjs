@@ -1,7 +1,8 @@
 module.exports = mongoose => mongoose.model(
     'board',
     mongoose.Schema(
-        {passengerId: String,
+        {userid: String,
+            title: String,
             name: String,
             teamId: String,
             subject: String             
