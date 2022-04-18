@@ -7,7 +7,7 @@ module.exports = mongoose => mongoose.model(
              name: String,             
              phone: String,            
              birth: String,
-             address: String,
+             address: String
              
             }, { timestamps: true}
         )

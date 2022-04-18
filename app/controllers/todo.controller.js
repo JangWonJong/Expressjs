@@ -9,7 +9,6 @@ exports.todo = (req, res) =>{
         })
 }
 
-
 exports.todolist = (req, res) =>{
     console.log(` ### todoController acess ### `)
     TodoSchema.find()
