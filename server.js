@@ -7,6 +7,7 @@ import basicRouter from './app/routes/basic.js'
 import boardRouter from './app/routes/board.js'
 import todoRouter from './app/routes/todo.js'
 import userRouter from './app/routes/user.js'
+import ResponseService from './app/services/responseService.js'
 
 
 // import tokenRouter from './app/routes/token.js' import todoController from
@@ -28,8 +29,7 @@ async function startServer() {
     app.use("/board", boardRouter)
     app.use("/todo", todoRouter)
     app.use("/user", userRouter)
-    
-
+    const responseService = new ResponseService()
     
     db.mongoose
         .connect(mongoUri, {

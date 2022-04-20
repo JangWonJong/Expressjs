@@ -1,4 +1,4 @@
-const { bmi } = require('../services/basicservice')
+const { bmi } = require('../services/basicService')
 exports.getBmi = (res, req)=> {
   const {name, height, weight} = req.body
     console.log(`넘어온 JSON 값 : ${JSON.stringify(req.body)}`)
