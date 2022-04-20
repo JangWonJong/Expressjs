@@ -4,7 +4,7 @@ require('dotenv').config()
 const {verifyToken} = require('./middlewares')
 
 //JWT 보안
-const router = express.Router() 
+export default function TokenRoute(){}
 
 router.post('/', async (req, res) => {
     try {
