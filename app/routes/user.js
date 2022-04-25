@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import UserService from '../services/userService.js'
+import passport from 'passport'
 
 dotenv.config()
 const corsOptions = {
@@ -20,13 +21,22 @@ app.use(function(_req, res, next) {
 app.post('/join', cors(corsOptions),(req,res)=>{
     UserService().join(req,res)
 })
-app.get('/', cors(corsOptions),(req, res)=>{
+app.get('/list', cors(corsOptions),(req, res)=>{
     UserService().getUser(req,res)
 })
 
 app.post('/login', cors(corsOptions),(req, res)=>{
     UserService().login(req,res)
 })
+
+app.get(
+    '/logout',
+     passport.authenticate('jwt', {session: false}),
+     function(req,res){
+       UserService().logout(req,res)
+       res.logout()
+       res.json({msg: 'LOGOUT'})
+     } )
 
 export default app
 /*const { signup, userlist, profile, login } = require('../controllers/user.controller')

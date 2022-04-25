@@ -2,18 +2,21 @@ import db from '../models/index.js'
 import dotenv from 'dotenv'
 
 export default function UserService() {
-    const User = db
-        .user
-        dotenv
-        .config()
+    const User = db.user
+        dotenv.config()
 
     return {
         join(req, res) {
             console.log(' ### 진행 4: 노드서버에 진입함 ' + JSON.stringify(req.body))
             new User(req.body).save(() => {
-                res
-                    .status(200)
-                    .json({'result': 'ok'})
+                if(err) {
+                    res.status(500).send({message: err})
+                    console.log('회원가입 실패')
+                    return
+                    
+                }else{
+                    res.status(200).json({ok: 'ok'})
+                }
             })
         },
         getUser(_req, res) {
@@ -29,21 +32,7 @@ export default function UserService() {
                         .status(200)
                         .json({success: true, users})
                 })
-        },
-        profile(req, res) {
-            console.log(`### user profile access `)
-            User
-                .find({userid: req.params.id})
-                .exec((err, user) => {
-                    if (err) 
-                        return res
-                            .status(400)
-                            .send(err)
-                    res
-                        .status(200)
-                        .json({success: true, user})
-                })
-        },
+        },        
         login(req, res) {
             User.findOne({
                 userid: req.body.userid
@@ -62,7 +51,7 @@ export default function UserService() {
                             console.log(' ### 비밀번호가 틀렸 : ')
                             res
                                 .status(401)
-                                .send({loginSuccess: false, msg: '비밀번호가 틀렸습니다.'});
+                                .send({msg: '비밀번호가 틀렸습니다.'});
                         } else {
                             console.log(' ### JWT 발급 직전 : ')
                             /**const token = jwt.sign(user.toJSON(), 'jwt-secret', {
@@ -79,13 +68,18 @@ export default function UserService() {
                                     // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
                                 res
                                     .status(200)
-                                    .json({loginSuccess: true, token: user.token, user: user})
+                                    .json(user)
                             })
 
                         }
                     })
                 }
             })
+        },
+        logout(){
+            req.logout()
+            res.json({success: true, msg: '로그아웃'})
         }
+
     }
 }

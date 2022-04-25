@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import express from 'express'
+import passport from 'passport'
 import db from './app/models/index.js'
 import indexRouter from './app/routes/index.js'
 import apiRouter from './app/routes/api.js'
@@ -8,6 +9,7 @@ import boardRouter from './app/routes/board.js'
 import todoRouter from './app/routes/todo.js'
 import userRouter from './app/routes/user.js'
 import ResponseService from './app/services/responseService.js'
+import morgan from 'morgan'
 
 
 // import tokenRouter from './app/routes/token.js' import todoController from
@@ -29,7 +31,7 @@ async function startServer() {
     app.use("/board", boardRouter)
     app.use("/todo", todoRouter)
     app.use("/user", userRouter)
-    const responseService = new ResponseService()
+    app.use(morgan('dev'))
     
     db.mongoose
         .connect(mongoUri, {

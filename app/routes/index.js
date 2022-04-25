@@ -4,7 +4,7 @@ var indexRouter = express.Router();
 /* GET home page. */
 
 
-indexRouter.route('/').get(function (req, res) {
+indexRouter.route('/').get(function (_req, res) {
   res.json({"현재 시간 : ": new Date().toLocaleString()})
 })
 
