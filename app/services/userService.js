@@ -8,7 +8,7 @@ export default function UserService() {
     return {
         join(req, res) {
             console.log(' ### 진행 4: 노드서버에 진입함 ' + JSON.stringify(req.body))
-            new User(req.body).save(() => {
+            new User(req.body).save(function(err){
                 if(err) {
                     res.status(500).send({message: err})
                     console.log('회원가입 실패')

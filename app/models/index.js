@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 const{ MONGO_URI } = process.env
 import mongoose from 'mongoose'
-import UserModel from './userModel.js'
+import UserModel from './user.js'
 mongoose.Promise = global.Promise
 
 const db = {}
