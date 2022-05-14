@@ -1,13 +1,14 @@
-module.exports = mongoose => mongoose.model(
-    'todo',
-    mongoose.Schema(
+
+export default function TodoModel(mongoose){
+    const todoSchema = mongoose.Schema(
         {userid: String,
-         task: String,
-         completed:String
-            
+            task: String,
+            completed:String
+
         }, { timestamps: true}
     )
-)
+    return mongoose.model('Todo', todoSchema)
+}
 
 
 

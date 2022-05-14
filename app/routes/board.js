@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
-
+import BoardService from '../services/boardService.js'
 dotenv.config()
 const corsOptions = {
     origin: process.env.ORIGIN,

@@ -33,6 +33,7 @@ async function startServer() {
     app.use("/user", userRouter)
     app.use(morgan('dev'))
     
+    
     db.mongoose
         .connect(mongoUri, {
             useNewUrlParser: true,
@@ -46,12 +47,14 @@ async function startServer() {
             process.exit();
         })
         app.all("*", function(_req, res) {
-            return responseService.notFoundResponse(res, "페이지를 찾을 수 없습니다");
+            return ResponseService().notFoundResponse(res, "페이지를 찾을 수 없습니다");
           });
           
           app.use((err, _req, res) => {
             if(err.name == "UnauthorizedError"){
-              return responseService.unauthorizedResponse(res, err.message);
+              
+              return ResponseService().unauthorizedResponse(res,err.message)
+              //return responseService.unauthorizedResponse(res, err.message);
             }
           });
 
